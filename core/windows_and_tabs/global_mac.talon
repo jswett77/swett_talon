@@ -10,3 +10,5 @@ fomo: key(ctrl-down)
 # escape
 meh: key(esc)
 
+# logout
+logout: key(cmd-ctrl-q)
