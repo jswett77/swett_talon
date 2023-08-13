@@ -15,12 +15,15 @@
 #         "does something"
 #         foo.something()
 
+
 # capture for sublime
 # from typing import Dict
 # from talon import Module, actions
 
-# mod = Module()
 
+
+
+# mod = Module()
 # @mod.capture(rule="all | here")
 # def sublime_find_type(m) -> str:
 #     "Just map requested find"

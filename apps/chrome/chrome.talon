@@ -10,3 +10,7 @@ helltool | (goto) hell:
 	key(h)
 	key(t)
 	key(tab)
+
+# consistency with 
+pop: key(cmd-[)
+push: key(cmd-])
