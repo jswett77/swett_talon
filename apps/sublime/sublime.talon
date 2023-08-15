@@ -29,3 +29,6 @@ go up: key(up)
 
 bet: key(cmd-d)
 undo that: key(cmd-z)
+
+nibble: key(alt-right)
+peck: key(alt-left)

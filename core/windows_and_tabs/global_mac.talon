@@ -4,7 +4,7 @@ os: mac
 show apps: key(ctrl-up)
 
 # All windows for app
-fomo: key(ctrl-down)
+^(fomo|show all)$: key(ctrl-down)
 
 # escape
 meh: key(esc)
@@ -15,7 +15,6 @@ logout: key(cmd-ctrl-q)
 # toggle between recent apps
 ^(what what)+$: key(cmd-tab)
 
-
 # finder
 ^(launch finder)$:
 	key("cmd-space")
@@ -24,3 +23,6 @@ logout: key(cmd-ctrl-q)
 	sleep(100ms)
 	key("enter")
 	
+# shunt to other dispaly
+^(shunt this)$:
+	key(cmd-ctrl-alt-right)

@@ -5,15 +5,26 @@ language: en
 chomp: key(alt-up)
 
 # navigation
-enhance: key(ctrl-b)   # goto def
-pop: key(alt-[)        # go back 
-push: key(alt-])       # return back
+
+# goto def
+enhance: key(ctrl-b) 
+
+# go back 
+pop: key(alt-[)
+
+# return back
+push: key(alt-])
 find: key(ctrl-shift-f)
 
-nibble: key(alt-right) # cursor token right TODO digits
-peck: key(alt-left) # cursor left TODO digits
+# cursor token right TODO digits
+nibble: key(alt-right)
 
-center: key(alt-c) # center editor to cursor
+# cursor left TODO digits
+peck: key(alt-left)
+
+# center editor to cursor
+center: key(alt-c)
+
 go tab next: key(ctrl-t)
 go tab previous: key(ctrl-shift-t)
 tab close: key(ctrl-w)
@@ -31,7 +42,15 @@ zoom out: key(ctrl-shift-,)
 zoom reset: key(ctrl-0)
 
 # git related stuff
-copy path: key(ctrl-alt-n) # for pasting git add
-restore here: key(alt-shift-r) # revert current change to master
-accept here: key(ctrl-shift-r) # accept master during diff
-git compare: key(ctrl-shift-d) # open diff
+
+# for pasting git add
+copy path: key(ctrl-alt-n)
+
+ # revert current change to master
+restore here: key(alt-shift-r)
+
+# accept master during diff
+accept here: key(ctrl-shift-r)
+
+# open diffmouseufway not that impressive but let's say I sayl
+git compare: key(ctrl-shift-d)
