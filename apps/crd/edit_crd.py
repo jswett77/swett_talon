@@ -1,15 +1,15 @@
-    # defines the default edit actions for linux
+# defines the default edit actions for linux
 from talon import Context, actions
 
 ctx = Context()
 ctx.matches = r"""
 os: mac
-app: chrome remote desktop
+and app: chrome remote desktop
 """
 
 
 
-@ctx.action_class("edit")
+@ctx.action_class("esdit")
 class EditActions:
     def copy():
         actions.key("ctrl-c")

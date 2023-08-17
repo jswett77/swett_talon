@@ -15,14 +15,21 @@ logout: key(cmd-ctrl-q)
 # toggle between recent apps
 ^(what what)+$: key(cmd-tab)
 
-# finder
-^(launch finder)$:
+# finder, other apps
+^(launch|open) <user.text>:
 	key("cmd-space")
 	sleep(10ms)
-	insert("Finder")
+    
+	insert(text)
 	sleep(100ms)
 	key("enter")
 	
-# shunt to other dispaly
-^(shunt this)$:
+^(close this)$:
+    key(cmd-w)
+
+# move to other dispaly
+^(punt this)$:
 	key(cmd-ctrl-alt-right)
+
+grab screen shot:
+    key(cmd-ctrl-shift-4)

@@ -28,6 +28,9 @@ center: key(alt-c)
 go tab next: key(ctrl-t)
 go tab previous: key(ctrl-shift-t)
 tab close: key(ctrl-w)
+
+goto line: key(ctrl-l)
+
 # todo go tab digit
 
 # edit

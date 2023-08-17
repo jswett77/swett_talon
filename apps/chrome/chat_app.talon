@@ -14,3 +14,5 @@ next|down: key(down)
 
 previous|up: key(up)
 
+find here: key(/)
+
