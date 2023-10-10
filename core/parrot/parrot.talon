@@ -1,11 +1,15 @@
 parrot(such):
 	# app.notify(" such such ")
 	print("Unsed such")
+
+parrot(thunk):
+	print("unused thunk")
 	
 parrot(snap):
-	print("snap")
+	print("\n\nsnap ! ! !")
 
 parrot(shsh):
 	# print("shhh shhh")
-	core.repeat_command(1)
+	print("Shh shhh detected")
+	# core.repeat_command(1)
 

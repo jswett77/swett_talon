@@ -1,0 +1,42 @@
+{
+    "such": {
+        "sounds": ["tounge_such"],
+        "threshold": {
+            ">power": 40,
+            ">probability": 0.99
+        },
+        "throttle": {
+            "such": 0.12
+        }
+    },
+    "snap": {
+        "sounds": ["tounge_snap"],
+        "threshold": {
+            ">power": 10,
+            ">probability": 0.50
+        },
+        "throttle": {
+            "snap": 0.12
+        }
+    },
+    "thunk": {
+        "sounds": ["tounge_thunk"],
+        "threshold": {
+            ">power": 20,
+            ">probability": 0.90
+        },
+        "throttle": {
+            "thunk": 0.12
+        }
+    },
+    "shsh": {
+        "sounds": ["shsh"],
+        "threshold": {
+            ">power": 10,
+            ">probability": 0.995
+        },
+        "throttle": {
+            "shsh": 0.4
+        }
+    }
+}

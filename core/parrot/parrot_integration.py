@@ -10,7 +10,7 @@ from talon.debug import log_exception
 from talon.experimental.parrot import ParrotSystem, ParrotDelegate, ParrotFrame
 from talon_init import TALON_HOME
 
-PARROT_HOME = TALON_HOME / 'parrot'
+PARROT_HOME = TALON_HOME / 'user/swett_talon/plugin/parrot'
 pattern_path = str(PARROT_HOME / 'patterns.json')
 model_path = str(PARROT_HOME / 'swett.pkl')
 

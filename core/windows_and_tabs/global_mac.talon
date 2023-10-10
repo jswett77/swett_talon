@@ -4,7 +4,7 @@ os: mac
 show apps: key(ctrl-up)
 
 # All windows for app
-^(fomo|show all)$: key(ctrl-down)
+^(fomo|show all|birds eye)$: key(ctrl-down)
 
 # escape
 meh: key(esc)
@@ -28,8 +28,25 @@ logout: key(cmd-ctrl-q)
     key(cmd-w)
 
 # move to other dispaly
-^(punt this)$:
-	key(cmd-ctrl-alt-right)
+# ^(punt this)$:
+#	key(cmd-ctrl-alt-right)
+# Use "snap next" instead111
 
 grab screen shot:
     key(cmd-ctrl-shift-4)
+
+new isntance:
+    key(cmd-n)
+
+
+# Rectangle Window Management
+window zoom out:
+	key(cmd-ctrl-alt--)
+	key(cmd-ctrl-alt--)
+	key(cmd-ctrl-alt--)
+
+window zoom in:
+	key(cmd-ctrl-alt-=)	
+	key(cmd-ctrl-alt-=)	
+	key(cmd-ctrl-alt-=)	
+	

@@ -2,15 +2,6 @@ app: chrome
 and os: mac
 -
 search: key(cmd-l)
-moma:
-	key(cmd-l)
-	key(m)
-	key(tab)
-helltool | (goto) hell:
-	key(cmd-l)
-	key(h)
-	key(t)
-	key(tab)
 
 # consistency with 
 pop: key(cmd-[)
@@ -35,3 +26,16 @@ tab search <user.text>$:
     sleep(200ms)
     insert("{text}")
     key(down)
+
+# emulate opening in new tab
+detach tab:
+	key(cmd-l)
+	sleep(100ms)
+	key(cmd-c)
+	sleep(100ms)
+	key(cmd-w)
+	sleep(100ms)
+	key(cmd-n)
+	key(cmd-l)
+	key(cmd-v)
+	key(enter)

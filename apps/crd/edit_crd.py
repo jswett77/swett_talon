@@ -4,12 +4,12 @@ from talon import Context, actions
 ctx = Context()
 ctx.matches = r"""
 os: mac
-and app: chrome remote desktop
+and app: Chrome Remote Desktop
 """
 
 
 
-@ctx.action_class("esdit")
+@ctx.action_class("edit")
 class EditActions:
     def copy():
         actions.key("ctrl-c")
@@ -28,7 +28,8 @@ class EditActions:
 
     def delete_word():
         actions.edit.selebct_word()
-        actions.edit.delete()
+        sleep(10)
+        actions.key("backspace")
 
     def down():
         actions.key("down")
@@ -137,7 +138,7 @@ class EditActions:
         # action(edit.paragraph_previous):
         # action(edit.paragraph_start):
 
-    def paste():
+    def paste(or_text: str = None):
         actions.key("ctrl-v")
         # action(paste_match_style):
 

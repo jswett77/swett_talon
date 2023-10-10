@@ -75,6 +75,7 @@ compose mail:
 select this:
   key(x)
 
+
 # s : Toggle star/Rotate among superstars
 # y : Remove label
 # e : Archive
