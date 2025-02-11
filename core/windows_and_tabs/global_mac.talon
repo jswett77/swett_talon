@@ -30,7 +30,7 @@ logout: key(cmd-ctrl-q)
 # move to other dispaly
 # ^(punt this)$:
 #	key(cmd-ctrl-alt-right)
-# Use "snap next" instead111
+# Use "snap next" instead
 
 grab screen shot:
     key(cmd-ctrl-shift-4)
@@ -49,4 +49,3 @@ window zoom in:
 	key(cmd-ctrl-alt-=)	
 	key(cmd-ctrl-alt-=)	
 	key(cmd-ctrl-alt-=)	
-	

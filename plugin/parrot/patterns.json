@@ -1,42 +1,44 @@
 {
     "such": {
-        "sounds": ["tounge_such"],
-        "threshold": {
-            ">power": 40,
-            ">probability": 0.99
-        },
-        "throttle": {
-            "such": 0.12
-        }
-    },
-    "snap": {
-        "sounds": ["tounge_snap"],
+        "sounds": ["such3"],
         "threshold": {
             ">power": 10,
-            ">probability": 0.50
+            ">probability": 0.95
         },
         "throttle": {
-            "snap": 0.12
+            "such": 0.1
         }
     },
     "thunk": {
-        "sounds": ["tounge_thunk"],
-        "threshold": {
-            ">power": 20,
-            ">probability": 0.90
-        },
-        "throttle": {
-            "thunk": 0.12
-        }
-    },
-    "shsh": {
-        "sounds": ["shsh"],
+        "sounds": ["tounge_thunk2"],
         "threshold": {
             ">power": 10,
-            ">probability": 0.995
+            ">probability": 0.85
         },
         "throttle": {
-            "shsh": 0.4
+            "thunk": 0.01
+        }
+    },
+    "shush": {
+        "sounds": ["shush2"],
+        "threshold": {
+            ">power": 10,
+            ">probability": 0.985
+        },
+        "throttle": {
+            "shush": 0.5,
+            "hiss": 0.2
+        }
+    },
+    "hiss": {
+        "sounds": ["hiss2"],
+        "threshold": {
+            ">power": 10,
+            ">probability": 0.985
+        },
+        "throttle": {
+            "shush": 0.25,
+            "hiss": 0.15
         }
     }
 }

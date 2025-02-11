@@ -1,4 +1,6 @@
 app: Chrome Remote Desktop
+app: Calcite Remote Desktop
+
 language: en
 -
 # selection
@@ -23,6 +25,15 @@ go named:
   key(shift)
   key(shift)
 
+toggle comment: 
+  key(alt-/)
+  key(up)
+  key(ctrl-a)
+flip line|comment: 
+  key(alt-/)
+  key(up)
+  key(ctrl-a)
+
 annotate:
   key(ctrl-alt-shift-s)
 
@@ -46,11 +57,18 @@ goto line: key(ctrl-l)
 
 swap tab: key(ctrl-shift-o)
 
+project swap: key(ctrl-shift-`)
+
 replace all: key(ctrl-shift-w)
 
 # show file in project viewer
 reveal: key(ctrl-alt-shift-o)
 
+reload this:
+  key(ctrl+shift+y)
+
+# copy a few lines of text
+(select <number_small>) lines: user.select_some_lines(number_small or 0)
 
 # edit
 undo that: key(ctrl-z)
@@ -129,4 +147,8 @@ set pry:
   sleep(50ms)
   key(up)
   sleep(200ms)
-  user.paste("Looker.pry(bindin9f9g)")
+  insert("Looker.pry(binding)")
+
+show recents: key(ctrl-shift-e)
+
+

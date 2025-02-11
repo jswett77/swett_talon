@@ -1,12 +1,40 @@
 # defines the default edit actions for linux
-from talon import Context, actions
+from talon import Module, Context, actions
+import time
 
+mod = Module()
 ctx = Context()
 ctx.matches = r"""
 os: mac
 and app: Chrome Remote Desktop
 """
 
+@mod.action_class
+class Actions:
+    def select_some_lines(n: int = None):
+        """Select a few lines"""
+
+@ctx.action_class("user")
+class CustomEditActions:
+    def select_some_lines(n: int = None):
+        """Select n lines of text"""
+
+        if n is not None:
+            actions.key("ctrl-a")
+            for i in range(n):
+                time.sleep(0.1)
+                actions.key("shift-down")
+            actions.key("shift-end")
+            time.sleep(0.1)
+            actions.key("ctrl-c")
+            time.sleep(0.1)
+            actions.key("esc")
+            time.sleep(0.1)
+            for i in range(n):
+                actions.key("up")
+                time.sleep(0.1)
+            actions.key("up")
+            actions.key("home")
 
 
 @ctx.action_class("edit")
@@ -138,7 +166,7 @@ class EditActions:
         # action(edit.paragraph_previous):
         # action(edit.paragraph_start):
 
-    def paste(or_text: str = None):
+    def paste():
         actions.key("ctrl-v")
         # action(paste_match_style):
 

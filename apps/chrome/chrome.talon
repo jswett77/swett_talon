@@ -39,3 +39,6 @@ detach tab:
 	key(cmd-l)
 	key(cmd-v)
 	key(enter)
+
+chomp:
+	key(shift-alt-right)
