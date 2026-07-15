@@ -12,7 +12,7 @@ from talon_init import TALON_HOME
 
 PARROT_HOME = TALON_HOME / 'user/swett_talon/plugin/parrot'
 pattern_path = str(PARROT_HOME / 'patterns.json')
-model_path = str(PARROT_HOME / 'oct.18.pkl')
+model_path = str(PARROT_HOME / 'swett.pkl')
 
 ## START PARROT CLASSES ##
 class PatternMatcher:
@@ -299,7 +299,7 @@ class Delegate(ParrotDelegate):
 
         return active
 
-parrot_delegate = Delegate(debug=True)
+parrot_delegate = Delegate(debug=False)
 system = ParrotSystem(model_path, parrot_delegate)
 
 @resource.watch(pattern_path)
