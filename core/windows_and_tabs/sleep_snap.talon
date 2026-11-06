@@ -1,10 +1,10 @@
 mode: all
 -
-^window next$:
-    app.window_next()
+[window] (window next | next window | cycle window):
+    user.sleep_window_next()
 
-^window (last | previous)$:
-    app.window_previous()
+[window] (window (last | previous) | (last | previous) window):
+    user.sleep_window_previous()
 
 ^snap <user.window_snap_position>$:
     user.snap_window(window_snap_position)
