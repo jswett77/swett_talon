@@ -1,5 +1,11 @@
 mode: all
 -
+^window next$:
+    app.window_next()
+
+^window (last | previous)$:
+    app.window_previous()
+
 ^snap <user.window_snap_position>$:
     user.snap_window(window_snap_position)
 
