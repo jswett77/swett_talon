@@ -49,3 +49,8 @@ window zoom in:
 	key(cmd-ctrl-alt-=)	
 	key(cmd-ctrl-alt-=)	
 	key(cmd-ctrl-alt-=)	
+
+# Handoff to macOS dictation
+handoff|(hand off):
+	speech.disable()
+	key(ctrl-alt-a)	
