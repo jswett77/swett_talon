@@ -1,6 +1,6 @@
 # Personal Laptop Talon Update & Sync Guide
 
-> **Context for Executing Agent**: This guide is designed to be executed directly on the user's personal macOS laptop to synchronize their custom Talon configuration (`swett_talon`) with the work laptop setup, decouple it from community repo modifications, and ensure full feature parity.
+> **Context for Executing Agent**: This guide is designed to be executed directly on the user's personal macOS laptop by an AI coding assistant (or user) to synchronize their custom Talon configuration (`swett_talon`) with the work laptop setup, decouple it from community repo modifications, and ensure full feature parity.
 
 ---
 
@@ -10,6 +10,7 @@
 - **Renamed and Relocated**: The repository originally created by Jeff Knaus (`knausj85/knausj_talon`) was officially transferred to the `talonhub` GitHub organization and renamed to **[`talonhub/community`](https://github.com/talonhub/community)**.
 - **Redirects**: `https://github.com/knausj85/knausj_talon` automatically redirects to `https://github.com/talonhub/community`.
 - **Directory Name in Talon**: Talon recursively loads all `.talon` and `.py` scripts located inside `~/.talon/user/` regardless of folder name. Whether the community folder is named `community` or `knausj_talon`, Talon treats it identically.
+- **IMPORTANT - Do Not Double-Load**: Ensure you have only **one** community folder (`community` OR `knausj_talon`). Having both will cause duplicate declaration collisions.
 - **Modern Best Practice**: The standard community folder name is now `~/.talon/user/community`. It should be kept **100% clean and unmodified** so that it tracks upstream `main` without merge conflicts.
 
 ---
@@ -25,24 +26,36 @@ On the personal laptop, `~/.talon/user/` should look like this:
 └── talon-gaze-ocr/     # git@github.com:jswett77/talon-gaze-ocr.git (if using Tobii eye tracker)
 ```
 
-> [!NOTE]
-> `swett_google_only` should **NOT** exist on the personal laptop. All generic functionality (terminal dictation, scrubber, silent window cycling, app focus, tmux tabs, and sleep commands) has been completely extracted into `swett_talon`.
+> [!WARNING]
+> `swett_google_only` should **NOT** exist in `~/.talon/user/` on the personal laptop. All generic functionality (terminal dictation, scrubber, silent window cycling, app focus, tmux tabs, and sleep commands) has been completely extracted into `swett_talon`.
+> If `swett_google_only` is currently present on the personal laptop, do not delete it outright; move it out of the active user directory:
+> ```bash
+> mv ~/.talon/user/swett_google_only ~/.talon/swett_google_only.bak
+> ```
 
 ---
 
 ## 3. Step-by-Step Sync Instructions for the Personal Laptop
 
 ### Step 1: Inspect `~/.talon/user`
-Run the following check to see what directories currently exist:
+Run the following check to inspect existing folders:
 ```bash
 ls -la ~/.talon/user
 ```
-Identify whether the community repo is named `community` or `knausj_talon`, and confirm `swett_talon` is present.
+- Confirm `swett_talon` is present (if missing, clone: `git clone git@github.com:jswett77/swett_talon.git`).
+- Check whether the community repository is named `community` or `knausj_talon`. If neither exists, clone it:
+  ```bash
+  git clone https://github.com/talonhub/community.git ~/.talon/user/community
+  ```
+- If `swett_google_only` is present, move it out:
+  ```bash
+  mv ~/.talon/user/swett_google_only ~/.talon/swett_google_only.bak
+  ```
 
 ---
 
 ### Step 2: Sync and Update `swett_talon`
-Navigate into `swett_talon` and ensure your working directory is clean before pulling:
+Navigate into `swett_talon`, inspect status, and pull latest:
 
 ```bash
 cd ~/.talon/user/swett_talon
@@ -50,10 +63,10 @@ cd ~/.talon/user/swett_talon
 # Check git status
 git status
 
-# If there are unstaged local changes or untracked test files, stash them
-git stash --include-untracked
+# If there are modified tracked files or unstaged changes, stash them safely:
+# git stash
 
-# Ensure remote is tracking origin main and pull latest commits
+# Pull latest commits from main
 git fetch origin
 git checkout main
 git pull origin main
@@ -64,54 +77,82 @@ Run:
 ```bash
 git log -n 5 --oneline
 ```
-You should see the latest commits:
-- `21e7790` — *Disable knausj pop clicks cleanly to prevent interference with Parrot*
-- `76ca05c` — *Add sleep focus, wake/sleep commands, and snag app alias to personal repo*
-- `347bdb2` — *Extract voice dictate, trailing keyword scrubber, tmux tabs, and handoff to personal repo*
-- `757fe0c` — *Add sleep_window action and broaden voice trigger for window cycling*
-- `68f0feb` — *Enable window next and window last in sleep mode*
+Expected recent commits:
+- `disable_knausj_pop` & settings override (pop noise decoupling for Parrot)
+- `Add sleep focus, wake/sleep commands, and snag app alias to personal repo`
+- `Extract voice dictate, trailing keyword scrubber, tmux tabs, and handoff to personal repo`
+- `Add sleep_window action and broaden voice trigger for window cycling`
+- `Enable window next and window last in sleep mode`
 
 ---
 
-### Step 3: Ensure Community Repo Is Clean (No Local Forks/Tweaks)
-If the personal laptop has a clone of `community` (or `knausj_talon`), ensure it is on a clean, unmodified tracking branch:
+### Step 3: Clean and Update Community Repository
+Ensure the community repository is tracked cleanly on `main` without local divergence:
 
 ```bash
-# Check whichever community folder exists:
 COMMUNITY_DIR="$([ -d ~/.talon/user/community ] && echo ~/.talon/user/community || echo ~/.talon/user/knausj_talon)"
 cd "$COMMUNITY_DIR"
 
-git status
-```
+# 1. Update remote URL if still pointing to old knausj85 address
+git remote set-url origin https://github.com/talonhub/community.git
 
-- If `git status` shows modified files (like old `wake_and_sleep.talon` or `mouse.py` tweaks), discard or stash them:
-  ```bash
-  git stash
-  git checkout main
-  git pull origin main
-  ```
-- All custom overrides are now loaded with higher priority from `swett_talon`, so the community repo can stay completely stock.
+# 2. Check current branch and changes
+git status
+git branch
+
+# 3. If there are old committed tweaks on a custom branch (e.g. my_tweaks), preserve the branch as backup:
+# git branch my_tweaks_backup
+
+# 4. Switch to main and discard old local knausj edits (everything is now in swett_talon)
+git checkout main
+git pull origin main
+```
 
 ---
 
-### Step 4: Verify Talon Engine & Reload Log
-Talon hot-reloads scripts whenever files are updated. Check the live log:
+### Step 4: Verify Talon Engine Reload
+Talon hot-reloads scripts automatically. Filter the log for errors or `swett_talon` events:
 
 ```bash
-tail -n 50 ~/.talon/talon.log
+grep -nE "ERROR|swett_talon" ~/.talon/talon.log | tail -n 25
 ```
 
-Confirm that:
-1. `swett_talon/core/windows_and_tabs/sleep_window.py` loaded without errors.
-2. `swett_talon/core/parrot/disable_knausj_pop.py` loaded without errors.
-3. `swett_talon/core/app_switcher/sleep_focus.py` loaded without errors.
-4. `swett_talon/apps/iTerm2/voice_scrub.py` loaded without errors.
+Ensure there are no `RuntimeError` or duplicate action declaration crashes.
 
 ---
 
-## 4. Verification & Testing Checklist
+## 4. Verification Checklists
 
-Once synced, test each of the following voice commands:
+### A. Automated Agent Verification (Files & Triggers on Disk)
+An executing agent can verify the environment programmatically:
+
+1. **Pop noise decoupling**:
+   ```bash
+   grep "mouse_enable_pop_click = 0" ~/.talon/user/swett_talon/core/parrot/parrot.talon
+   ```
+2. **Window cycling & snapping**:
+   ```bash
+   test -f ~/.talon/user/swett_talon/core/windows_and_tabs/sleep_window.py && echo "sleep_window.py OK"
+   grep -E "window next|cycle window" ~/.talon/user/swett_talon/core/windows_and_tabs/sleep_snap.talon
+   ```
+3. **Voice dictation & trailing scrubber**:
+   ```bash
+   test -f ~/.talon/user/swett_talon/apps/iTerm2/voice_scrub.py && echo "voice_scrub.py OK"
+   grep -E "wonder|send it|let it rip" ~/.talon/user/swett_talon/apps/iTerm2/voice.talon
+   ```
+4. **Handoff & Snag**:
+   ```bash
+   grep -E "handoff|snag" ~/.talon/user/swett_talon/core/windows_and_tabs/global_mac.talon
+   ```
+5. **Silent Mode App Focus**:
+   ```bash
+   test -f ~/.talon/user/swett_talon/core/app_switcher/sleep_focus.py && echo "sleep_focus.py OK"
+   grep -E "focus chrome|focus term|focus chat" ~/.talon/user/swett_talon/core/app_switcher/sleep_focus.talon
+   ```
+
+---
+
+### B. User Voice Verification (Spoken by User)
 
 | Command | Expected Action | Verification |
 | :--- | :--- | :--- |
@@ -131,6 +172,6 @@ Once synced, test each of the following voice commands:
 
 ## 5. Troubleshooting Reference
 
+- **SSH Authentication on Personal Laptop**: Pulling `swett_talon` requires that GitHub SSH keys (`git@github.com:...`) are configured on the personal laptop. If using HTTPS, ensure `gh auth login` or a Personal Access Token is active.
 - **Mac Accessibility Permissions**: If window cycling or app focusing fails, verify in macOS **System Settings → Privacy & Security → Accessibility** that **Talon** is enabled.
-- **Mac Microphone Permissions**: Ensure **Talon** (and **iTerm2** if using local mic server) are granted Microphone access under **System Settings → Privacy & Security → Microphone**.
-- **Parrot Noise Clashing**: If making pop sounds clicks the mouse, ensure `core/parrot/disable_knausj_pop.py` is loaded in `swett_talon`. It intercepts `user.noise_trigger_pop` and prevents knausj's default mouse click handler.
+- **Mac Microphone Permissions**: Ensure **Talon** is granted Microphone access under **System Settings → Privacy & Security → Microphone**.

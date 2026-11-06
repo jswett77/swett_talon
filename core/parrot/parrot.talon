@@ -1,3 +1,7 @@
+settings():
+	user.mouse_enable_pop_click = 0
+	user.mouse_enable_pop_stops_scroll = 0
+
 parrot(such):
 	# app.notify(" such such ")
 	print("Such detected")
