@@ -11,8 +11,11 @@ ten four | send it:
 let it rip | let her rip | letter rip:
   user.iterm_finish_voice_and_scrub(1)
 
-scrub tail | drop tail:
-  user.iterm_scrub_trailing_keywords()
+scrub tail | drop tail | chomp tail:
+  user.iterm_scrub_trailing_keywords(0)
+
+scrub send | chomp send:
+  user.iterm_scrub_trailing_keywords(1)
 
 go tab <number>:
   user.tab_jump(number)

@@ -87,7 +87,7 @@ Expected recent commits:
 ---
 
 ### Step 3: Clean and Update Community Repository
-Ensure the community repository is tracked cleanly on `main` without local divergence:
+Check the installed Talon version (`grep "Talon Version:" ~/.talon/talon.log | tail -n 1`) before selecting the community revision—upstream `main` now targets **Talon 1.0+** (`egui` / Python 3.14), whereas **Talon 0.4.x** requires the **`v0.4`** release tag:
 
 ```bash
 COMMUNITY_DIR="$([ -d ~/.talon/user/community ] && echo ~/.talon/user/community || echo ~/.talon/user/knausj_talon)"
@@ -95,17 +95,18 @@ cd "$COMMUNITY_DIR"
 
 # 1. Update remote URL if still pointing to old knausj85 address
 git remote set-url origin https://github.com/talonhub/community.git
+git fetch origin --tags
 
-# 2. Check current branch and changes
+# 2. Check current branch and preserve any old custom branch (e.g. my_tweaks) as backup
 git status
 git branch
-
-# 3. If there are old committed tweaks on a custom branch (e.g. my_tweaks), preserve the branch as backup:
 # git branch my_tweaks_backup
 
-# 4. Switch to main and discard old local knausj edits (everything is now in swett_talon)
-git checkout main
-git pull origin main
+# 3a. If running Talon 0.4.x (check `grep "Talon Version:" ~/.talon/talon.log | tail -n 1`):
+git checkout -B community_v0.4 v0.4
+
+# 3b. Only if running Talon 1.0+:
+# git checkout main && git pull origin main
 ```
 
 ---
@@ -142,7 +143,8 @@ An executing agent can verify the environment programmatically:
    ```
 4. **Handoff & Snag**:
    ```bash
-   grep -E "handoff|snag" ~/.talon/user/swett_talon/core/windows_and_tabs/global_mac.talon
+   grep -E "handoff" ~/.talon/user/swett_talon/core/modes/wake_and_sleep_mac.talon
+   grep -E "snag" ~/.talon/user/swett_talon/core/windows_and_tabs/global_mac.talon
    ```
 5. **Silent Mode App Focus**:
    ```bash

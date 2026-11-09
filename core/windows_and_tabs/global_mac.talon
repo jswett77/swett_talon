@@ -50,11 +50,6 @@ window zoom in:
 	key(cmd-ctrl-alt-=)	
 	key(cmd-ctrl-alt-=)	
 
-# Handoff to macOS dictation
-handoff|(hand off):
-	speech.disable()
-	key(ctrl-alt-a)
-
 # Focus app alias
 snag <user.running_applications>:
 	user.switcher_focus(running_applications)	
