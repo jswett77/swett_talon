@@ -6,7 +6,7 @@ ctx = Context()
 ctx.matches = r"""
 os: mac
 and app: iTerm2
-and title: /hell\d*|(tmux a -t brap)|tmux/
+and title: /hell\d*|brap|tmux/
 """
 
 
@@ -16,4 +16,5 @@ class tab_actions:
         """Jump to a tab"""
         if number <= 9:
             actions.key("ctrl-b")
+            actions.sleep("30ms")
             actions.key(f"{number}")

@@ -17,8 +17,8 @@ scrub tail | drop tail | chomp tail:
 scrub send | chomp send:
   user.iterm_scrub_trailing_keywords(1)
 
-go tab <number>:
-  user.tab_jump(number)
+^go tab <number_small>$:
+  user.tab_jump(number_small)
 
 stamp it | stampede:
   key(ctrl-k)
